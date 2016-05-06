@@ -1,7 +1,10 @@
 class NotesController < ApplicationController
   def index
     @notes = Note.order(created_at: :desc)
-    render json: {notes: @notes}
+    respond_to do |format|
+      format.html 
+      format.json {render :json => {notes: @notes}}
+    end
   end
 
   def show
