@@ -34,6 +34,7 @@ class NotesController < ApplicationController
       render json: {task: nil}, status: :accepted
     else
       render json: {errors: @note.errors}, status: :unprocessable_entity
+    end
   end
 
 protected
