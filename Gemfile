@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem "devise"
+gem "react_on_rails", '~> 5.0' 
 gem "cloudinary"
 gem "carrierwave"
 # Use ActiveModel has_secure_password
