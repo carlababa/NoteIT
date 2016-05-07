@@ -1,5 +1,8 @@
 import React from 'react'
 import EditableFieldComponent from './EditableFieldComponent';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {List, ListItem} from 'material-ui/List';
+
 
 class NoteComponent extends React.Component {
   constructor(props) {
@@ -33,12 +36,28 @@ class NoteComponent extends React.Component {
     }
   }
 
+  cardStyle(){
+    return{
+      margin: "20px",
+      display: "inline-block",
+      padding: "50px",
+      backgroundColor: "#ffff99"
+    };
+
+  }
+
   render () {
     return(
-      <li>
-        <h1><EditableFieldComponent name="title" onUpdate={this.save.bind(this)} value={this.state.title} /></h1>
-        <p><EditableFieldComponent name="content" onUpdate={this.save.bind(this)} value={this.state.content} /></p>
-      </li>
+      <Card style={this.cardStyle()}>
+        <List>
+            <CardTitle>
+            <h2><EditableFieldComponent name="title" onUpdate={this.save.bind(this)} value={this.state.title} /></h2>
+            </CardTitle>
+            <CardText>
+            <p><EditableFieldComponent name="content" onUpdate={this.save.bind(this)} value={this.state.content} /></p>
+            </CardText>
+        </List>
+      </Card>
     );
   }
 }
