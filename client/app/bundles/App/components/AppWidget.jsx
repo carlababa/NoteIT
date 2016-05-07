@@ -1,5 +1,3 @@
-// all your dump component names with Widget.
-
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
 
@@ -14,11 +12,25 @@ export default class AppWidget extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-
-    // Uses lodash to bind all methods to the context of the object instance, otherwise
-    // the methods defined here would not refer to the component's class, not the component
-    // instance itself.
     _.bindAll(this, 'handleChange');
+
+    this.state = {
+      notes: []
+    };
+  }
+
+  componentDidMount() {
+    this.getNotes();
+  }
+
+  getNotes() {
+    let component = this;
+    let url = "/notes.json";
+    jQuery.getJSON(url, function(data){
+      component.setState({
+        notes: data.notes
+      });
+    });
   }
 
   // React will automatically provide us with the event `e`
@@ -28,23 +40,20 @@ export default class AppWidget extends React.Component {
   }
 
   render() {
-    const { name } = this.props;
-    return (
-      <div className="container">
-        <h3>
-          Hello, {name}!
-        </h3>
-        <hr />
-        <form className="form-horizontal">
-          <label>
-            Say hello to:
-          </label>
-          <input
-            type="text"
-            value={name}
-            onChange={this.handleChange}
-          />
-        </form>
+    return(
+      <div className="notes">
+        <h1>Notes</h1>
+        <ul>
+          {this.state.notes.map(function(note){
+            return(
+              <div>
+                <li>{note.title}</li>
+                <li>{note.content}</li>
+
+              </div>
+            );
+          })}
+        </ul>
       </div>
     );
   }
