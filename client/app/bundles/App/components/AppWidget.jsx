@@ -38,12 +38,20 @@ export default class AppWidget extends React.Component {
 
   deleteNotes() {
     console.log("Delete notes, but which ones?")
-    this.setState ({ notes: this.state.notes
-      .filter( (note) => { return !note.delete } )
-      // .forEach( (note) => {
-      //   console.log("This one: " + note.title )
-      // } )
-    })
+    this.state.notes
+      .filter( (note) => { return note.delete } )
+      .forEach( (note) => {
+        console.log("This one: " + note.title )
+        jQuery.ajax({
+          type: "DELETE",
+          url: `/notes/${note.id}.json`,
+          contentType: "application/json",
+          dataType:"json"})
+
+          .success((data) => {
+            this.getNotes();
+          });
+      });
   }
 
   onNewNote(noteTitle, noteContent) {
