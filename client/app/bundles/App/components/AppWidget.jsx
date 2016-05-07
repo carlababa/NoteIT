@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import NewNoteComponent from './NewNoteComponent';
 import NoteComponent from './NoteComponent';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 // Simple example of a React "dumb" component
 export default class AppWidget extends React.Component {
@@ -106,6 +108,7 @@ export default class AppWidget extends React.Component {
 
   render() {
     return(
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div className="notes">
         <h1>Notes</h1>
         <button
@@ -142,6 +145,7 @@ export default class AppWidget extends React.Component {
         <h2>New Note?</h2>
         <NewNoteComponent onSubmit={this.onNewNote.bind(this)}/>
       </div>
+      </MuiThemeProvider>
     );
   }
 }
