@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  
+
   def index
     #render json: current_user
     @notes = current_user.notes.order(created_at: :desc)
@@ -24,7 +24,7 @@ class NotesController < ApplicationController
 
   def update
     @note = current_user.notes.find(params[:id])
-    if @note = update(note_params)
+    if @note.update(note_params)
       render json: {note: @note}, status: :accepted
     else
       render json: {errors: @note.errors}, status: :unprocessable_entity
