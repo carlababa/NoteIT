@@ -1,6 +1,8 @@
+
 import React from 'react';
-import App from '../containers/App';
+import { Router, browserHistory } from 'react-router';
+import routes from './routes';
 
 export default (props) => (
-  <App {...props} />
+  <Router history={browserHistory} children={routes} {...props} />
 );
