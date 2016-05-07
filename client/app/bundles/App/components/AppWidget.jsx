@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
+import NewNoteComponent from './NewNoteComponent';
+import NoteComponent from './NoteComponent';
 
 // Simple example of a React "dumb" component
 export default class AppWidget extends React.Component {
@@ -44,6 +46,50 @@ export default class AppWidget extends React.Component {
     })
   }
 
+  onNewNote(noteTitle, noteContent) {
+    let newNote = {
+      title: noteTitle,
+      content: noteContent
+    };
+
+    let newNotes = this.state.notes.concat(newNote);
+    this.setState({
+      notes: newNotes
+    });
+
+    this.saveData(newNote);
+  }
+
+  saveData(newNotes){
+    jQuery.ajax({
+      type: "POST",
+      url: "/notes.json",
+      data: JSON.stringify({
+        note: newNotes
+      }),
+      contentType: "application/json",
+      dataType:"json"})
+
+      .success((data) => {
+        this.getNotes();
+      });
+  }
+
+  updateNote(note){
+    jQuery.ajax({
+      type: "PATCH",
+      url: `/notes/${note.id}.json`,
+      data: JSON.stringify({
+        note: note
+      }),
+      contentType: "application/json",
+      dataType:"json"})
+
+      .success((data) => {
+        this.getNotes();
+      });
+  }
+
   // React will automatically provide us with the event `e`
   handleChange(e) {
     const name = e.target.value;
@@ -51,7 +97,6 @@ export default class AppWidget extends React.Component {
   }
 
   render() {
-    console.log(this.state.notes)
     return(
       <div className="notes">
         <h1>Notes</h1>
@@ -66,9 +111,8 @@ export default class AppWidget extends React.Component {
         <ul>
           {this.state.notes.map((note) => {
             return(
-              <li key = { note.id }>
-                <h3>{note.title}</h3>
-                { note.content}
+              <li key={ note.id }>
+                <NoteComponent note={note} onUpdate={this.updateNote.bind(this)} />
                 { this.state.deleting
                   ? <input
                       type="checkbox"
@@ -78,7 +122,7 @@ export default class AppWidget extends React.Component {
                         this.setState({ notes: this.state.notes.map ((note) => {
                           if (note.id === id) { return Object.assign({}, note, { delete: event.target.checked}) }
                           else return note
-                        })})
+                        })});
                       }}
                     />
                   : ""
@@ -87,6 +131,8 @@ export default class AppWidget extends React.Component {
             );
           })}
         </ul>
+        <h2>New Note?</h2>
+        <NewNoteComponent onSubmit={this.onNewNote.bind(this)}/>
       </div>
     );
   }

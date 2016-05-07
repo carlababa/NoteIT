@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   resources :notes
 
   get "ui(/*all)" => "ui#index", as: :react_router
+
+  root "ui#index"
 end
