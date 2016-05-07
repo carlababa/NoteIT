@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import AppWidget from '../components/AppWidget';
 import _ from 'lodash';
+import SearchBox from "../components/SearchBox";
 
 // Simple example of a React "smart" component
 export default class App extends React.Component {
@@ -13,7 +14,10 @@ export default class App extends React.Component {
 
     // How to set initial state in ES6 class syntax
     // https://facebook.github.io/react/docs/reusable-components.html#es6-classes
-    this.state = { name: this.props.name };
+    this.state = {
+      name: this.props.name
+
+    }
 
     // Uses lodash to bind all methods to the context of the object instance, otherwise
     // the methods defined here would not refer to the component's class, not the component
@@ -28,7 +32,6 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-
         {this.props.children}
       </div>
     );
