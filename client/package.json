@@ -31,10 +31,12 @@
     "jquery-ujs": "^1.2.1",
     "loader-utils": "^0.2.13",
     "lodash": "^4.7.0",
+    "material-ui": "^0.15.0",
     "react": "^0.14.8 || ^15.0.0",
     "react-dom": "^0.14.8 || ^15.0.0",
     "react-on-rails": "5.2.0",
     "react-router": "^2.4.0",
+    "react-tap-event-plugin": "^1.0.0",
     "webpack": "^1.12.14"
   },
   "devDependencies": {}
