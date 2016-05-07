@@ -18,6 +18,7 @@ export default class AppWidget extends React.Component {
 
     this.state = {
       notes: []
+    , deleting: false
     };
   }
 
@@ -33,6 +34,24 @@ export default class AppWidget extends React.Component {
         notes: data.notes
       });
     });
+  }
+
+  deleteNotes() {
+    console.log("Delete notes, but which ones?")
+    this.state.notes
+      .filter( (note) => { return note.delete } )
+      .forEach( (note) => {
+        console.log("This one: " + note.title )
+        jQuery.ajax({
+          type: "DELETE",
+          url: `/notes/${note.id}.json`,
+          contentType: "application/json",
+          dataType:"json"})
+
+          .success((data) => {
+            this.getNotes();
+          });
+      });
   }
 
   onNewNote(noteTitle, noteContent) {
@@ -57,8 +76,11 @@ export default class AppWidget extends React.Component {
         note: newNotes
       }),
       contentType: "application/json",
-      dataType:"json"
-    });
+      dataType:"json"})
+
+      .success((data) => {
+        this.getNotes();
+      });
   }
 
   updateNote(note){
@@ -69,8 +91,11 @@ export default class AppWidget extends React.Component {
         note: note
       }),
       contentType: "application/json",
-      dataType:"json"
-    });
+      dataType:"json"})
+
+      .success((data) => {
+        this.getNotes();
+      });
   }
 
   // React will automatically provide us with the event `e`
@@ -83,12 +108,36 @@ export default class AppWidget extends React.Component {
     return(
       <div className="notes">
         <h1>Notes</h1>
+        <button
+          onClick={ () => {
+            this.setState({deleting: !this.state.deleting})
+            this.deleteNotes()
+          }}
+        >
+          Remove Notes
+        </button>
         <ul>
-          {this.state.notes.map(function(note){
+          {this.state.notes.map((note) => {
             return(
-              <NoteComponent note={note} onUpdate={this.updateNote.bind(this)} />
+              <li key={ note.id }>
+                <NoteComponent note={note} onUpdate={this.updateNote.bind(this)} />
+                { this.state.deleting
+                  ? <input
+                      type="checkbox"
+                      checked={ note.delete || false }
+                      onChange={ (event) => {
+                        let id = note.id
+                        this.setState({ notes: this.state.notes.map ((note) => {
+                          if (note.id === id) { return Object.assign({}, note, { delete: event.target.checked}) }
+                          else return note
+                        })});
+                      }}
+                    />
+                  : ""
+                }
+              </li>
             );
-          }.bind(this))}
+          })}
         </ul>
         <h2>New Note?</h2>
         <NewNoteComponent onSubmit={this.onNewNote.bind(this)}/>
