@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
+import NewNoteComponent from './NewNoteComponent';
+import NoteComponent from './NoteComponent';
 
 // Simple example of a React "dumb" component
 export default class AppWidget extends React.Component {
@@ -33,6 +35,44 @@ export default class AppWidget extends React.Component {
     });
   }
 
+  onNewNote(noteTitle, noteContent) {
+    let newNote = {
+      title: noteTitle,
+      content: noteContent
+    };
+
+    let newNotes = this.state.notes.concat(newNote);
+    this.setState({
+      notes: newNotes
+    });
+
+    this.saveData(newNote);
+  }
+
+  saveData(newNotes){
+    jQuery.ajax({
+      type: "POST",
+      url: "/notes.json",
+      data: JSON.stringify({
+        note: newNotes
+      }),
+      contentType: "application/json",
+      dataType:"json"
+    });
+  }
+
+  updateNote(note){
+    jQuery.ajax({
+      type: "PATCH",
+      url: `/notes/${note.id}.json`,
+      data: JSON.stringify({
+        note: note
+      }),
+      contentType: "application/json",
+      dataType:"json"
+    });
+  }
+
   // React will automatically provide us with the event `e`
   handleChange(e) {
     const name = e.target.value;
@@ -46,14 +86,12 @@ export default class AppWidget extends React.Component {
         <ul>
           {this.state.notes.map(function(note){
             return(
-              <div>
-                <li>{note.title}</li>
-                <li>{note.content}</li>
-
-              </div>
+              <NoteComponent note={note} onUpdate={this.updateNote.bind(this)} />
             );
-          })}
+          }.bind(this))}
         </ul>
+        <h2>New Note?</h2>
+        <NewNoteComponent onSubmit={this.onNewNote.bind(this)}/>
       </div>
     );
   }
