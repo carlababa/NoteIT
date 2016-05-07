@@ -5,3 +5,12 @@ Note.create([
   ])
 
   puts "Seeded #{Note.count} Notes!"
+
+User.create([
+  { email: "suzanne@note.it", password:"abcd1234" },
+  { email: "carla@note.it", password: "abcd1234"},
+  { email: "renee@note.it", password: "abcd1234"},
+  { email: "rogier@note.it", password: "abcd1234"}
+  ])
+
+  puts "Seeded"

@@ -28,8 +28,11 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <AppWidget name={this.state.name} updateName={this.updateName} />
+
+        {this.props.children}
       </div>
     );
   }
 }
+
+// <AppWidget name={this.state.name} updateName={this.updateName} />
