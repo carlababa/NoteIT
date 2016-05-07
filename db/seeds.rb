@@ -13,4 +13,4 @@ User.create([
   { email: "rogier@note.it", password: "abcd1234"}
   ])
 
-  puts "Seeded"
+  puts "Seeded #{User.count} users!"
