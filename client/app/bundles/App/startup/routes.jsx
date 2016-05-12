@@ -6,11 +6,15 @@ import AppWidget from '../components/AppWidget';
 import Home from '../containers/Home';
 import Test from '../containers/Test';
 
-export default (props) => (
-  <Router history={browserHistory} {...props} >
+module.exports = function (props) {
+  const createElement = function (Component, subProps) {
+    return <Component currentUser={props.currentUser} {...subProps} />
+  };
+
+  return <Router history={browserHistory} createElement={createElement} >
     <Route path="/" component={App}>
       <IndexRoute component={AppWidget} />
       <Route path="test" component={Test} />
     </Route>
   </Router>
-);
+}
