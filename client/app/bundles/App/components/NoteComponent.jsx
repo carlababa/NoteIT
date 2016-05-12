@@ -41,7 +41,8 @@ class NoteComponent extends React.Component {
       margin: "20px",
       display: "inline-block",
       padding: "50px",
-      backgroundColor: "#ffff99"
+      backgroundColor: "#ffff99",
+      maxWidth: "350px"
     };
 
   }
@@ -50,12 +51,12 @@ class NoteComponent extends React.Component {
     return(
       <Card style={this.cardStyle()}>
         <List>
-            <CardTitle>
+          <CardTitle>
             <h2><EditableFieldComponent name="title" onUpdate={this.save.bind(this)} value={this.state.title} /></h2>
-            </CardTitle>
-            <CardText>
-            <p><EditableFieldComponent name="content" onUpdate={this.save.bind(this)} value={this.state.content} /></p>
-            </CardText>
+          </CardTitle>
+          <CardText>
+            <EditableFieldComponent name="content" onUpdate={this.save.bind(this)} value={this.state.content} />
+          </CardText>
         </List>
       </Card>
     );

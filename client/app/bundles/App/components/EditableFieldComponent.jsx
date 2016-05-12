@@ -32,11 +32,17 @@ class EditableFieldComponent extends React.Component {
     }
   }
 
+  sizeEditable(){
+    return{
+      maxWidth: "200px"
+    };
+  }
+
   render () {
     return(
       <span>
         {this.state.editing &&
-          <input ref="value" type="text" defaultValue={this.state.value} onBlur={this.save.bind(this)} onKeyPress={this.checkKey.bind(this)} autofocus="true" />}
+          <input style={this.sizeEditable()} ref="value" type="text" defaultValue={this.state.value} onBlur={this.save.bind(this)} onKeyPress={this.checkKey.bind(this)} autofocus="true" />}
         {!this.state.editing &&
           <span onClick={this.toggleEditable.bind(this)}>{this.state.value}</span>}
       </span>

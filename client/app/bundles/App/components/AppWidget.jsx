@@ -6,15 +6,10 @@ import Navbar from './Navbar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import RaisedButton from 'material-ui/RaisedButton';
+import {List, ListItem} from 'material-ui/List';
 
 // Simple example of a React "dumb" component
 export default class AppWidget extends React.Component {
-  static propTypes = {
-    // If you have lots of data or action properties, you should consider grouping them by
-    // passing two properties: "data" and "actions".
-    updateName: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-  };
 
   constructor(props, context) {
     super(props, context);
@@ -22,7 +17,6 @@ export default class AppWidget extends React.Component {
 
     this.state = {
       notes: []
-    , deleting: false
     };
   }
 
@@ -102,52 +96,66 @@ export default class AppWidget extends React.Component {
       });
   }
 
+  toggleNoteSelection(note, event){
+    if (event.target.tagName == 'DIV') {
+      note.delete = !note.delete;
+    }
+
+    let border = note.delete ? '2px solid #65affb' : '';
+    event.currentTarget.firstChild.style.border = border;
+  }
+
   // React will automatically provide us with the event `e`
   handleChange(e) {
     const name = e.target.value;
     this.props.updateName(name);
   }
 
+  buttonStyle(){
+    return{
+      margin: 12,
+      paddingRight: 9,
+      paddingLeft: 9
+    };
+  }
+
+  containerStyle(){
+    return{
+      fontFamily: "Roboto",
+      margin: "auto",
+      width: "70%"
+    };
+  }
+
+  displayInline(){
+    return{
+      display: "inline-block",
+    };
+  }
+
   render() {
     return(
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div className="notes">
-
         <Navbar />
-        <h1>Notes</h1>
-        <RaisedButton
-          onClick={ () => {
-            this.setState({deleting: !this.state.deleting})
-            this.deleteNotes()
-          }}
-        >
-          Remove Notes
-        </RaisedButton>
-        <ul>
-          {this.state.notes.map((note) => {
-            return(
-              <li key={ note.id }>
-                <NoteComponent note={note} onUpdate={this.updateNote.bind(this)} />
-                { this.state.deleting
-                  ? <input
-                      type="checkbox"
-                      checked={ note.delete || false }
-                      onChange={ (event) => {
-                        let id = note.id
-                        this.setState({ notes: this.state.notes.map ((note) => {
-                          if (note.id === id) { return Object.assign({}, note, { delete: event.target.checked}) }
-                          else return note
-                        })});
-                      }}
-                    />
-                  : ""
-                }
-              </li>
-            );
-          })}
-        </ul>
-        <h2>New Note?</h2>
-        <NewNoteComponent onSubmit={this.onNewNote.bind(this)}/>
+        <div style={this.containerStyle()}>
+          <h1>Your Notes</h1>
+          <RaisedButton style={this.buttonStyle()}
+            onClick={ () => {
+              this.deleteNotes()
+            }}>Remove Notes</RaisedButton>
+          <div>
+            {this.state.notes.map((note) => {
+              return(
+                <div key={ note.id } onClick={this.toggleNoteSelection.bind(this, note)} style={this.displayInline()} >
+                  <NoteComponent note={note} onUpdate={this.updateNote.bind(this)} />
+                </div>
+              );
+            })}
+          </div>
+          <h2>New Note?</h2>
+          <NewNoteComponent onSubmit={this.onNewNote.bind(this)}/>
+        </div>
       </div>
       </MuiThemeProvider>
     );
