@@ -10,6 +10,12 @@ class NewNoteComponent extends React.Component {
     this.props.onSubmit(noteTitle, noteContent);
   }
 
+  buttonMargins(){
+    return{
+      marginTop: 12 
+    };
+  }
+
   render () {
     return(
       <form onSubmit={this.onSubmit.bind(this)}>
@@ -23,7 +29,7 @@ class NewNoteComponent extends React.Component {
           <input ref="contentInput" />
         </div>
         <div>
-          <RaisedButton>Add Note</RaisedButton>
+          <RaisedButton type="submit" style={this.buttonMargins()}>Add Note</RaisedButton>
         </div>
 
       </form>
