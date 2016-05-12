@@ -10,12 +10,6 @@ import {List, ListItem} from 'material-ui/List';
 
 // Simple example of a React "dumb" component
 export default class AppWidget extends React.Component {
-  static propTypes = {
-    // If you have lots of data or action properties, you should consider grouping them by
-    // passing two properties: "data" and "actions".
-    updateName: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-  };
 
   constructor(props, context) {
     super(props, context);
