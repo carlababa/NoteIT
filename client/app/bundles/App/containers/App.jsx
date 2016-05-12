@@ -24,9 +24,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <AppWidget currentUser={this.props.currentUser}/>
-      </div>
+      <AppWidget currentUser={this.props.currentUser}/>
     );
   }
 }

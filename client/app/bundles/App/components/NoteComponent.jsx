@@ -41,7 +41,8 @@ class NoteComponent extends React.Component {
       margin: "20px",
       display: "inline-block",
       padding: "50px",
-      backgroundColor: "#ffff99"
+      backgroundColor: "#ffff99",
+      maxWidth: "350px"
     };
 
   }

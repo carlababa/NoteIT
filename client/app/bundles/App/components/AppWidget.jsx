@@ -121,7 +121,7 @@ export default class AppWidget extends React.Component {
     return{
       fontFamily: "Roboto",
       margin: "auto",
-      width: "60%"
+      width: "70%"
     };
   }
 
