@@ -23,7 +23,6 @@ export default class AppWidget extends React.Component {
 
     this.state = {
       notes: []
-    , deleting: false
     };
   }
 
@@ -103,6 +102,15 @@ export default class AppWidget extends React.Component {
       });
   }
 
+  toggleNoteSelection(note, event){
+    if (event.target.tagName == 'DIV') {
+      note.delete = !note.delete;
+    }
+
+    let border = note.delete ? '2px solid #65affb' : '';
+    event.currentTarget.firstChild.style.border = border;
+  }
+
   // React will automatically provide us with the event `e`
   handleChange(e) {
     const name = e.target.value;
@@ -127,7 +135,7 @@ export default class AppWidget extends React.Component {
 
   displayInline(){
     return{
-      display: "inline-block"
+      display: "inline-block",
     };
   }
 
@@ -140,28 +148,13 @@ export default class AppWidget extends React.Component {
           <h1>Your Notes</h1>
           <RaisedButton style={this.buttonStyle()}
             onClick={ () => {
-              this.setState({deleting: !this.state.deleting})
               this.deleteNotes()
             }}>Remove Notes</RaisedButton>
           <div>
             {this.state.notes.map((note) => {
               return(
-                <div key={ note.id } style={this.displayInline()}>
+                <div key={ note.id } onClick={this.toggleNoteSelection.bind(this, note)} style={this.displayInline()} >
                   <NoteComponent note={note} onUpdate={this.updateNote.bind(this)} />
-                  { this.state.deleting
-                    ? <input
-                        type="checkbox"
-                        checked={ note.delete || false }
-                        onChange={ (event) => {
-                          let id = note.id
-                          this.setState({ notes: this.state.notes.map ((note) => {
-                            if (note.id === id) { return Object.assign({}, note, { delete: event.target.checked}) }
-                            else return note
-                          })});
-                        }}
-                      />
-                    : ""
-                  }
                 </div>
               );
             })}
