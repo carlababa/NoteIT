@@ -27,6 +27,9 @@ gem "react_on_rails", '~> 5.0'
 gem "cloudinary"
 gem "carrierwave"
 gem 'appsignal'
+gem 'puma'
+
+gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
