@@ -53,6 +53,10 @@ export default class AppWidget extends React.Component {
   }
 
   onNewNote(noteTitle, noteContent) {
+    if (!noteTitle && !noteContent) {
+      return
+    }
+
     let newNote = {
       title: noteTitle,
       content: noteContent
