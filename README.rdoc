@@ -1,28 +1,27 @@
-== README
+== NoteIT
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+NoteIT app is made to store your notes in an easy way. 
+It was pre-designed during a hackaton and it is still being improved.
 
-Things you may want to cover:
+You can find the demo version at: https://note-it-app.herokuapp.com
 
-* Ruby version
+=== Stack
 
-* System dependencies
+The Application was built with ReactJS and Ruby on Rails using the gem [react_on_rails](https://github.com/shakacode/react_on_rails) that allows to render the React components into the Rails views.
 
-* Configuration
+=== Running the App
 
-* Database creation
+Database initialization:
 
-* Database initialization
+  rake db:create
+  rake db:migrate
+  
+Bundling:
 
-* How to run the test suite
+  bundle install
+  cd client && npm install
 
-* Services (job queues, cache servers, search engines, etc.)
+Start server:
 
-* Deployment instructions
+  foreman start -f Procfile.dev
 
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
