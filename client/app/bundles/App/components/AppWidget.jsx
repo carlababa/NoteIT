@@ -112,8 +112,10 @@ export default class AppWidget extends React.Component {
     let border = note.delete ? '2px solid #65affb' : '';
     event.currentTarget.firstChild.style.border = border;
 
+    let hasDeletingNotes = this.state.notes.filter((note) => { return note.delete }).length;
+
     this.setState({
-      deleting: "DELETE selected"
+      deleting: hasDeletingNotes > 0 ? "DELETE selected" : "Select Notes to Delete"
     });
   }
 
