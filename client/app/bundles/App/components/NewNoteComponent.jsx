@@ -24,13 +24,18 @@ class NewNoteComponent extends React.Component {
     };
   }
 
+  alignStyle1(){
+    return{
+      textAlign: "left"
+    };
+  }
+
   render () {
     return(
       <div style={this.alignStyle()}>
         <form onSubmit={this.onSubmit.bind(this)}>
-          <TextField type="input" ref="titleInput" hintText="Title" />
-          <br/>
-          <TextField type="input" ref="contentInput" hintText="Content" multiLine={true}/>
+          <div><TextField type="input" ref="titleInput" floatingLabelText="Title"/></div>
+          <div><TextField style={this.alignStyle1()} type="input" ref="contentInput" multiLine={true} floatingLabelText="Content"/></div>
           <div>
             <RaisedButton type="submit" style={this.buttonMargins()}>Add Note</RaisedButton>
           </div>

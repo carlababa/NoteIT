@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 class EditableFieldComponent extends React.Component {
   constructor(props) {
@@ -34,7 +34,8 @@ class EditableFieldComponent extends React.Component {
 
   sizeEditable(){
     return{
-      maxWidth: "200px"
+      width: "200px",
+      backgroundColor: "#ffff99"
     };
   }
 
