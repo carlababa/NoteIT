@@ -14,10 +14,15 @@ class Navbar extends React.Component {
       });
   }
 
+  navbarStyle() {
+    return{
+      backgroundColor: "#3D2B3D"
+    };
+  }
 
   render(){
     return(
-      <AppBar
+      <AppBar style={this.navbarStyle()}
         title="NoteIT"
         iconElementRight={<FlatButton label="Logout" onClick={this.logout.bind(this)} />}
       />

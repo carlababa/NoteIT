@@ -5,7 +5,7 @@ import NoteComponent from './NoteComponent';
 import Navbar from './Navbar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import {List, ListItem} from 'material-ui/List';
 
 // Simple example of a React "dumb" component
@@ -125,15 +125,14 @@ export default class AppWidget extends React.Component {
     this.props.updateName(name);
   }
 
-  buttonStyle(){
+  buttonD() {
     return{
-      margin: 12,
-      paddingRight: 9,
-      paddingLeft: 9
+      color: "#9B1D20",
+      marginLeft: 6
     };
   }
 
-  containerStyle(){
+  containerStyle() {
     return{
       fontFamily: "Roboto",
       margin: "auto",
@@ -154,10 +153,10 @@ export default class AppWidget extends React.Component {
         <Navbar />
         <div style={this.containerStyle()}>
           <h1>Your Notes</h1>
-          <RaisedButton style={this.buttonStyle()}
+          <FlatButton label={this.state.deleting} style={this.buttonD()}
             onClick={ () => {
               this.deleteNotes()
-            }}>{this.state.deleting}</RaisedButton>
+            }}></FlatButton>
           <div>
             {this.state.notes.map((note) => {
               return(
