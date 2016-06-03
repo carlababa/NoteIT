@@ -16,7 +16,8 @@ export default class AppWidget extends React.Component {
     _.bindAll(this, 'handleChange');
 
     this.state = {
-      notes: []
+      notes: [],
+      deleting: "Select Notes to Delete"
     };
   }
 
@@ -49,6 +50,9 @@ export default class AppWidget extends React.Component {
           .success((data) => {
             this.getNotes();
           });
+      });
+      this.setState({
+        deleting: "Select Notes to Delete"
       });
   }
 
@@ -107,6 +111,12 @@ export default class AppWidget extends React.Component {
 
     let border = note.delete ? '2px solid #65affb' : '';
     event.currentTarget.firstChild.style.border = border;
+
+    let hasDeletingNotes = this.state.notes.filter((note) => { return note.delete }).length;
+
+    this.setState({
+      deleting: hasDeletingNotes > 0 ? "Delete selected" : "Select Notes to Delete"
+    });
   }
 
   // React will automatically provide us with the event `e`
@@ -147,7 +157,7 @@ export default class AppWidget extends React.Component {
           <RaisedButton style={this.buttonStyle()}
             onClick={ () => {
               this.deleteNotes()
-            }}>Remove Notes</RaisedButton>
+            }}>{this.state.deleting}</RaisedButton>
           <div>
             {this.state.notes.map((note) => {
               return(

@@ -1,4 +1,5 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
 
 class EditableFieldComponent extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class EditableFieldComponent extends React.Component {
   }
 
   save() {
-    let newValue = this.refs.value.value;
+    let newValue = this.refs.value.getValue();
     this.props.onUpdate(this.props.name, newValue);
     this.setState({
       editing: false,
@@ -43,7 +44,7 @@ class EditableFieldComponent extends React.Component {
     return(
       <span>
         {this.state.editing &&
-          <input style={this.sizeEditable()} ref="value" type="text" defaultValue={this.state.value} onBlur={this.save.bind(this)} onKeyPress={this.checkKey.bind(this)} autofocus="true" />}
+          <TextField style={this.sizeEditable()} ref="value" type="text" defaultValue={this.state.value} onBlur={this.save.bind(this)} onKeyPress={this.checkKey.bind(this)} autofocus="true" />}
         {!this.state.editing &&
           <span onClick={this.toggleEditable.bind(this)}>{this.state.value}</span>}
       </span>
