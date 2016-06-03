@@ -36,7 +36,7 @@ class EditableFieldComponent extends React.Component {
   sizeEditable(){
     return{
       width: "200px",
-      backgroundColor: "#ffff99",
+      backgroundColor: "#ffff99"
     };
   }
 
