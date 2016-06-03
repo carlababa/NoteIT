@@ -115,7 +115,7 @@ export default class AppWidget extends React.Component {
     let hasDeletingNotes = this.state.notes.filter((note) => { return note.delete }).length;
 
     this.setState({
-      deleting: hasDeletingNotes > 0 ? "DELETE selected" : "Select Notes to Delete"
+      deleting: hasDeletingNotes > 0 ? "Delete selected" : "Select Notes to Delete"
     });
   }
 
