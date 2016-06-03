@@ -14,7 +14,8 @@ class NewNoteComponent extends React.Component {
 
   buttonMargins(){
     return{
-      marginTop: 12
+      marginTop: 12,
+      color: "#3C6E71",
     };
   }
 
@@ -37,7 +38,7 @@ class NewNoteComponent extends React.Component {
           <div><TextField type="input" ref="titleInput" floatingLabelText="Title"/></div>
           <div><TextField style={this.alignStyle1()} type="input" ref="contentInput" multiLine={true} floatingLabelText="Content"/></div>
           <div>
-            <RaisedButton type="submit" style={this.buttonMargins()}>Add Note</RaisedButton>
+            <RaisedButton type="submit" style={this.buttonMargins()} label="Add Note"></RaisedButton>
           </div>
         </form>
       </div>
