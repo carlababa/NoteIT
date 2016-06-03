@@ -16,7 +16,7 @@ class Navbar extends React.Component {
 
   navbarStyle() {
     return{
-      backgroundColor: "#3D2B3D"
+      backgroundColor: "#2c3e50"
     };
   }
 

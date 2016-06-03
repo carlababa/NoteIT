@@ -3,6 +3,7 @@ import _ from 'lodash';
 import NewNoteComponent from './NewNoteComponent';
 import NoteComponent from './NoteComponent';
 import Navbar from './Navbar';
+import Footer from './Footer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import FlatButton from 'material-ui/FlatButton';
@@ -169,6 +170,7 @@ export default class AppWidget extends React.Component {
           <h2>New Note?</h2>
           <NewNoteComponent onSubmit={this.onNewNote.bind(this)}/>
         </div>
+        <Footer />
       </div>
       </MuiThemeProvider>
     );
