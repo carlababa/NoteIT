@@ -6,7 +6,7 @@
 /*# sourceMappingURL=bootstrap.min.css.map */
 
 .field {
-  margin-left: 45%;
+  text-align: center;
   margin-top: 3%;
 }
 
@@ -28,9 +28,24 @@ h2 {
 }
 
 .container-form {
-  background-color: #00BCD4;
+  background-color: #2c3e50;
   margin-top: 50px;
   margin-right: 150px;
   margin-left: 150px;
   padding: 40px 0px;
+  color: #eee;
+  border-radius: 10px;
+}
+
+.container-form a{
+  color: #eee;
+}
+
+.container-form input{
+  color: #2c3e50;
+}
+
+.info {
+  padding: 0 40px;
+  color: #ffff99;
 }
